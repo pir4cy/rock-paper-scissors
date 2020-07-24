@@ -1,0 +1,53 @@
+<head>
+<script>
+    let playOptions = ['rock','paper','scissors'];      //Array of options
+   
+    let computerPlay = function(){
+        let randomNum = Math.floor(Math.random()*playOptions.length);
+        let computerChoice = playOptions[randomNum];
+        return computerChoice;
+    }
+
+    let userPlay = function(){
+        let playerChoice = prompt(`Choose your weapon (rock/paper/scissors)`);
+        return playerChoice.toLowerCase();
+    }
+
+    let deciderFunc = function (playerChoice,computerChoice){               //function to decide if computer wins or loses
+        switch(computerChoice) { 
+            case `rock`:
+                if (playerChoice == `paper`) return 0;
+                else return 1;
+                break;
+            case `paper`:
+                if(playerChoice == `rock`) return 1;
+                else return 0;
+                break;
+            case `scissor`:
+                if (playerChoice == `rock`) return 0;
+                else return 1;
+        }
+    }
+    
+    let playRound = function(playerChoice,computerChoice){              //play 1 round
+        if (computerChoice == playerChoice){
+            console.log (`It's a tie!`);
+        }
+        else {
+            if (!deciderFunc(playerChoice,computerChoice)){
+                console.log(`You Win! ${playerChoice} beats ${computerChoice}`);
+            }
+            else {
+                console.log(`You Lose! ${computerChoice} beats ${playerChoice}`);
+            }
+        }
+    }
+
+    let game = function (){
+        for (var i = 0; i<5; i++){
+            playRound(userPlay(),computerPlay());
+        }
+    }    
+    game();
+</script>
+</head>
