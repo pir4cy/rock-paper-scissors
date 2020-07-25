@@ -4,7 +4,7 @@ const buttons = document.querySelectorAll('button');
     const buttonPaper = document.querySelector('#paper');
     const buttonScis = document.querySelector('#scissors');
     buttons.forEach((button) => {
-        button.style.cssText = 'border-style: none; background-color:#fff9ff; margin: 100px;'
+        button.style.cssText = 'border-style: none; background-color:#fbf2f0; margin: 50px;'
     });
 const winner = document.querySelector('#winner');
 const result = document.querySelector('#result');
@@ -24,22 +24,23 @@ let playerWin = computerWin = false;
 let computerPlay = function(){
     let randomNum = Math.floor(Math.random()*playOptions.length);
     let computerChoice = playOptions[randomNum];
+    // console.log(computerChoice);
     return computerChoice;
 }
 
 //function to decide if computer wins or loses
 let deciderFunc = function (playerChoice,computerChoice){               
-    switch(computerChoice) { 
-        case `rock`:
-            if (playerChoice == `paper`) return 0;
+    switch(playerChoice) { 
+        case `Rock`:
+            if (computerChoice == `Paper`) return 0;
             else return 1;
             break;
-        case `paper`:
-            if(playerChoice == `rock`) return 1;
+        case `Paper`:
+            if(computerChoice == `Rock`) return 1;
             else return 0;
             break;
-        case `scissor`:
-            if (playerChoice == `rock`) return 0;
+        case `Scissor`:
+            if (computerChoice == `Rock`) return 0;
             else return 1;
     }
 }
@@ -50,12 +51,12 @@ let playRound = function(playerChoice,computerChoice){
         printRes.textContent =  `It's a tie!`;
     }
     else {
-        if (!deciderFunc(playerChoice,computerChoice)){
+        if (deciderFunc(playerChoice,computerChoice) == 1){
             printRes.textContent = `You Win! ${playerChoice} beats ${computerChoice}`;
             playerScore += 1; 
         }
         else {
-            printRes.textContent = `You Lose! ${computerChoice} beats ${playerChoice}`;
+            printRes.textContent = `You Lose! ${computerChoice} beats ${playerChoice}.`;
             computerScore += 1;
         }
     }
@@ -75,9 +76,8 @@ let playRound = function(playerChoice,computerChoice){
         }
     }
     result.appendChild(printRes);
-    score.appendChild(printScore);
     score.appendChild(printScoreComp);
-
+    score.appendChild(printScore);
 }
 
 //Playing the Game
